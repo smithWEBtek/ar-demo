@@ -1,7 +1,33 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+DATA_artists ={
+ :artist_keys =>
+		["name"],
+  :artists => [
+		["James Brown"],
+		["Sly & The Family Stone"],
+		["George Clinton"],
+		["Earth, Wind, & Fire"],
+		["Curtis Mayfield"],
+		["Stevie Wonder"],
+		["Isley Brothers"],
+		["Kool & The Gang"],
+		["Rick James"],
+		["Isaac Hayes"]
+	]
+}
+
+def make_artists
+  DATA_artists[:artists].each do |artist|
+    new_artist = Artist.new
+    artist.each_with_index do |attribute, i|
+      new_artist.send(DATA_artists[:artist_keys][i]+"=", attribute)
+    end
+    new_artist.save
+  end
+end
+
+def main
+  make_artists
+
+end
+
+main
